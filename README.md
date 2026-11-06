@@ -1,37 +1,39 @@
-# NLP SMS Spam Detection
+# SMS Spam Detection with NLP
 
-A machine learning project to detect spam SMS messages using natural language processing techniques.
+An exploratory machine-learning notebook that cleans text, engineers features, and compares classifiers for spam detection.
 
-## Project Overview
+## What the notebook covers
 
-This project implements an SMS spam detection system using machine learning. It performs:
-- Exploratory Data Analysis (EDA)
-- Feature Engineering
-- Data preprocessing and balancing
-- Model training and evaluation
+- Explores label balance and message characteristics.
+- Preprocesses text with regular expressions, stop-word removal, and lemmatization.
+- Builds TF-IDF features and explores Naive Bayes, decision trees, and random forests.
+- Uses classification reports and confusion matrices to inspect predictions.
 
-## Dataset
+**Tools:** Python, pandas, NumPy, NLTK, scikit-learn, Matplotlib, and seaborn. The notebook also contains TensorFlow/Keras experimentation.
 
-The project uses the Combined Enron dataset for SMS spam detection.
+## Repository
 
-### Key Statistics
-- **Total Messages**: 33,829
-- **Spam Messages**: 17,157
-- **Ham Messages**: 16,672
-- **Dataset Balance**: Nearly balanced (50/50 split after preprocessing)
+| File | Purpose |
+| --- | --- |
+| [Code.ipynb](Code.ipynb) | Data exploration, feature preparation, and model experiments |
 
-## Features Engineered
+## Running the notebook
 
-1. **word_count**: Number of words in each message
-   - Spam messages: typically 15-30 words
-   - Ham messages: below 25 words
+1. Create a Python environment and install the dependencies:
 
-2. **contains_currency_symbol**: Detects presence of currency symbols (€, $, ¥, £, ₹)
-   - ~1/3 of spam messages contain currency symbols
-   - Rarely used in ham messages
+   ```bash
+   pip install jupyter numpy pandas matplotlib seaborn nltk scikit-learn tensorflow
+   ```
 
-3. **contains_number**: Detects presence of numeric digits
-   - Helps differentiate between message types
+2. Make the dataset available locally. The notebook references `combined_enron.csv` and another CSV through absolute paths that are specific to the original environment. Update those paths to match your files. **The datasets are not included in this repository.**
+3. Open `Code.ipynb` in Jupyter or an editor that supports notebooks. Install any required NLTK resources when prompted, then run the cells in order.
 
-## Project Structure
+## Evaluation notes
 
+The current notebook performs parts of preprocessing and balancing before the train/test split. This can introduce data leakage, so the saved scores should be treated as exploratory. A stronger evaluation would split first, fit text transformations and resampling on training data only, and evaluate on an untouched test set.
+
+## Next improvements
+
+- Replace absolute file paths with configurable paths.
+- Package preprocessing and model training in a reproducible pipeline.
+- Report precision, recall, F1, and a confusion matrix on held-out data.
